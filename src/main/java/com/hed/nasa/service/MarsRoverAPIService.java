@@ -35,6 +35,14 @@ public class MarsRoverAPIService {
             response = rt.getForEntity("https://api.nasa.gov/mars-photos/api/v1/rovers/" + homeDto.getMarsApiRoverData() + "/photos?sol=" + homeDto.getMarsSol() + "&api_key="+API_KEY+"&camera="+name, MarsRoverApiResponse.class);
             photos.addAll(response.getBody().getPhotos());
         }
+        if(response == null)
+        {
+            response = rt.getForEntity("https://api.nasa.gov/mars-photos/api/v1/rovers/" + homeDto.getMarsApiRoverData() + "/photos?sol=" + homeDto.getMarsSol() + "&api_key="+API_KEY, MarsRoverApiResponse.class);
+        }
+        else
+        {
+            response.getBody().setPhotos(photos);
+        }
         response.getBody().setPhotos(photos);
         return response.getBody();
     }
@@ -53,5 +61,9 @@ public class MarsRoverAPIService {
             }
         }
         return cameraNames;
+    }
+
+    public Map<String, List<String>> getValidCameras() {
+        return validCameras;
     }
 }

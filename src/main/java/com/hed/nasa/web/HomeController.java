@@ -32,6 +32,7 @@ public class HomeController {
         model.put("maxSol",manifestData.getMaxSol());
         model.put("roverData",roverData);
         model.put("homeDto",homeDto);
+        model.put("validCameras",roverService.getValidCameras().get(homeDto.getMarsApiRoverData()));
         return "index";
     }
 }
