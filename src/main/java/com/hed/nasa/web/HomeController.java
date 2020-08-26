@@ -1,6 +1,8 @@
 package com.hed.nasa.web;
 
 import com.hed.nasa.response.MarsRoverApiResponse;
+import com.hed.nasa.response.RoverManifest;
+import com.hed.nasa.service.ManifestAPIService;
 import com.hed.nasa.service.MarsRoverAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ public class HomeController {
 
     @Autowired // Spring inicializuje za mě
     private MarsRoverAPIService roverService;
+    @Autowired
+    private ManifestAPIService manifestService;
 
     @GetMapping("/")
     public String postHomeView(ModelMap model, @RequestParam(required = false) String marsApiRoverData)
@@ -23,7 +27,9 @@ public class HomeController {
         {
             marsApiRoverData ="opportunity";
         }
+        RoverManifest manifestData = manifestService.getManifest(marsApiRoverData);
         MarsRoverApiResponse roverData = roverService.getRoverData(marsApiRoverData);
+        model.put("maxSol",manifestData.getMaxSol());
         model.put("roverData",roverData);
         return "index";
     }

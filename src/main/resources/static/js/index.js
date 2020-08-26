@@ -41,3 +41,14 @@ function highLightButton(roverType)
     document.getElementById('marsApi'+roverType).classList.remove('btn-secondary')
     document.getElementById('marsApi'+roverType).classList.add('btn-primary')
 }
+
+$(document).ready(function() {
+
+  const $valueSpan = $('.valueSpan2');
+  const $value = $('#customRange11');
+  $valueSpan.html($value.val());
+  $value.on('input change', () => {
+
+    $valueSpan.html($value.val());
+  });
+});
