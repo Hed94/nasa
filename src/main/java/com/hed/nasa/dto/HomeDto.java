@@ -1,6 +1,12 @@
 package com.hed.nasa.dto;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="mars_api_preferences")
 public class HomeDto {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
     private String marsApiRoverData;
     private Integer marsSol;
     private Boolean cameraFhaz;
@@ -14,6 +20,33 @@ public class HomeDto {
     private Boolean cameraMinites;
     private Boolean rememberPreferences;
 
+    @Override
+    public String toString() {
+        return "HomeDto{" +
+                "userId=" + userId +
+                ", marsApiRoverData='" + marsApiRoverData + '\'' +
+                ", marsSol=" + marsSol +
+                ", cameraFhaz=" + cameraFhaz +
+                ", cameraRhaz=" + cameraRhaz +
+                ", cameraMast=" + cameraMast +
+                ", cameraChemcam=" + cameraChemcam +
+                ", cameraMahli=" + cameraMahli +
+                ", cameraMardi=" + cameraMardi +
+                ", cameraNavcam=" + cameraNavcam +
+                ", cameraPancam=" + cameraPancam +
+                ", cameraMinites=" + cameraMinites +
+                ", rememberPreferences=" + rememberPreferences +
+                '}';
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    @Column(length = 20)
     public String getMarsApiRoverData() {
         return marsApiRoverData;
     }

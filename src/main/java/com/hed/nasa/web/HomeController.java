@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.util.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,7 +23,7 @@ public class HomeController {
     private ManifestAPIService manifestService;
 
     @GetMapping("/")
-    public String postHomeView(ModelMap model, HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
+    public String getHomeView(ModelMap model, HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         if(StringUtils.isEmpty(homeDto.getMarsApiRoverData()))
         {
             homeDto.setMarsApiRoverData("Opportunity");
@@ -34,5 +35,10 @@ public class HomeController {
         model.put("homeDto",homeDto);
         model.put("validCameras",roverService.getValidCameras().get(homeDto.getMarsApiRoverData()));
         return "index";
+    }
+
+    @PostMapping("/")
+    public String postHomeView(HomeDto homeDto) {
+        return "redirect:/";
     }
 }
