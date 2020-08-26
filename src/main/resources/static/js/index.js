@@ -32,13 +32,12 @@ function getUrlParameter(name) {
 const parameter = getUrlParameter("marsApiRoverData");
 highLightButton(parameter)
 
-if(parameter =='')
-{
-parameter = 'marsApi';
-}
-
 function highLightButton(roverType)
 {
+    if(roverType =='')
+    {
+    roverType = 'marsApi';
+    }
     document.getElementById('marsApi'+roverType).classList.remove('btn-secondary')
     document.getElementById('marsApi'+roverType).classList.add('btn-primary')
 }
