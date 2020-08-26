@@ -24,20 +24,19 @@
     <h2>Nasa Rover Photos</h2>
     <form method="get" action="" id="frmRoverType">
         <input type="hidden" id="marsApiRoverData" name="marsApiRoverData" value=""/>
-    <div class="btn-group btn-group-lg" role="group" aria-label="Basic example" style="margin: 2em 0em">
+    <div class="btn-group btn-group-lg" role="group" style="margin: 2em 0em;">
         <button type="button" class="btn btn-secondary" id="marsApiCuriosity">Curiosity</button>
         <button type="button" class="btn btn-secondary" id="marsApiOpportunity">Opportunity</button>
         <button type="button" class="btn btn-secondary" id="marsApiSpirit">Spirit</button>
     </div>
-    </form>
-
-    <div class="d-flex justify-content-center my-4">
-        <div class="w-75">
-            Mars Solar Day<input type="range" class="custom-range" id="customRange11" min="0" th:max="${maxSol}">
+        <div class="form-group">
+            <div class="w-75">
+                Mars Solar Day<input name="marsSol" value="1" type="range" class="custom-range" id="customRange11" min="0" th:max="${maxSol}">
+                <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
+            </div>
         </div>
-        <span class="font-weight-bold text-primary ml-2 valueSpan2"></span>
-    </div>
-    <button>Submit</button>
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
 
     <div th:each="index : ${#numbers.sequence(0,roverData.photos.size(),4)}" class="row" style="margin-bottom: 1em">
         <div class="col-sm" th:if="${index < roverData.photos.size()}">

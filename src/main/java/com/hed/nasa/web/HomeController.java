@@ -21,14 +21,15 @@ public class HomeController {
     private ManifestAPIService manifestService;
 
     @GetMapping("/")
-    public String postHomeView(ModelMap model, @RequestParam(required = false) String marsApiRoverData)
+    public String postHomeView(ModelMap model, @RequestParam(required = false) String marsApiRoverData
+            , @RequestParam(required = false) Integer marsSol)
     {
         if(StringUtils.isEmpty(marsApiRoverData))
         {
             marsApiRoverData ="opportunity";
         }
         RoverManifest manifestData = manifestService.getManifest(marsApiRoverData);
-        MarsRoverApiResponse roverData = roverService.getRoverData(marsApiRoverData);
+        MarsRoverApiResponse roverData = roverService.getRoverData(marsApiRoverData,marsSol);
         model.put("maxSol",manifestData.getMaxSol());
         model.put("roverData",roverData);
         return "index";
