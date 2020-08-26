@@ -11,6 +11,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.thymeleaf.util.StringUtils;
 
+import java.lang.reflect.InvocationTargetException;
+
 @Controller
 public class HomeController {
 
@@ -20,8 +22,7 @@ public class HomeController {
     private ManifestAPIService manifestService;
 
     @GetMapping("/")
-    public String postHomeView(ModelMap model, HomeDto homeDto)
-    {
+    public String postHomeView(ModelMap model, HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         if(StringUtils.isEmpty(homeDto.getMarsApiRoverData()))
         {
             homeDto.setMarsApiRoverData("Opportunity");

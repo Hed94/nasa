@@ -7,16 +7,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MarsRoverAPIService {
 
     private static final String API_KEY = "0rIHBZwB4gTtdMSrlMpfFaEqniVCFXSofHCQ8kni";
+    private Map<String,List<String>> validCameras = new HashMap<>();
 
-    public MarsRoverApiResponse getRoverData(HomeDto homeDto) {
+    public MarsRoverAPIService()
+    {
+        validCameras.put("Curiosity", Arrays.asList("FHAZ","RHAZ","MAST","CHEMCAM","MAHLI","MARDI","NAVCAM"));
+        validCameras.put("Opportunity", Arrays.asList("FHAZ","RHAZ","NAVCAM","PANCAM","MINITES"));
+        validCameras.put("Spirit", Arrays.asList("FHAZ","RHAZ","NAVCAM","PANCAM","MINITES"));
+    }
+
+    public MarsRoverApiResponse getRoverData(HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         RestTemplate rt = new RestTemplate();
         ResponseEntity<MarsRoverApiResponse> response = null;
         List<MarsPhoto> photos = new ArrayList<>();
@@ -31,15 +39,17 @@ public class MarsRoverAPIService {
         return response.getBody();
     }
 
-    public List<String> getNamesOfCameras(HomeDto homeDto)
-    {
+    public List<String> getNamesOfCameras(HomeDto homeDto) throws InvocationTargetException, IllegalAccessException {
         List<String> cameraNames = new ArrayList<>();
         Method[] methods = HomeDto.class.getMethods();
         for(Method method : methods)
         {
-            if(method.getName().contains("getCamera"))
+            if(method.getName().contains("getCamera") && Boolean.TRUE.equals(method.invoke(homeDto)))
             {
-                cameraNames.add(method.getName().substring(9));
+                String cameraName = method.getName().substring(9);
+                if(validCameras.get(homeDto.getMarsApiRoverData()).contains(cameraName.toUpperCase())) {
+                    cameraNames.add(cameraName);
+                }
             }
         }
         return cameraNames;
