@@ -20,7 +20,7 @@ function getUrlParameter(name) {
 const parameterRoverName = getUrlParameter("marsApiRoverData")
 highLightButton(parameterRoverName)
 const parameterSol = getUrlParameter("marsSol")
-document.getElementById('customRange11').value = parameterSol
+document.getElementById('marsSol').value = parameterSol
 
 function highLightButton(roverType)
 {
@@ -36,7 +36,7 @@ function highLightButton(roverType)
 $(document).ready(function() {
 
   const $valueSpan = $('.valueSpan2');
-  const $value = $('#customRange11');
+  const $value = $('#marsSol');
   $valueSpan.html($value.val());
   $value.on('input change', () => {
 

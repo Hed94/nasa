@@ -1,5 +1,6 @@
 package com.hed.nasa.web;
 
+import com.hed.nasa.dto.HomeDto;
 import com.hed.nasa.response.MarsRoverApiResponse;
 import com.hed.nasa.response.RoverManifest;
 import com.hed.nasa.service.ManifestAPIService;
@@ -21,17 +22,17 @@ public class HomeController {
     private ManifestAPIService manifestService;
 
     @GetMapping("/")
-    public String postHomeView(ModelMap model, @RequestParam(required = false) String marsApiRoverData
-            , @RequestParam(required = false) Integer marsSol)
+    public String postHomeView(ModelMap model, HomeDto homeDto)
     {
-        if(StringUtils.isEmpty(marsApiRoverData))
+        if(StringUtils.isEmpty(homeDto.getMarsApiRoverData()))
         {
-            marsApiRoverData ="opportunity";
+            homeDto.setMarsApiRoverData("opportunity");
         }
-        RoverManifest manifestData = manifestService.getManifest(marsApiRoverData);
-        MarsRoverApiResponse roverData = roverService.getRoverData(marsApiRoverData,marsSol);
+        RoverManifest manifestData = manifestService.getManifest(homeDto.getMarsApiRoverData());
+        MarsRoverApiResponse roverData = roverService.getRoverData(homeDto.getMarsApiRoverData(),homeDto.getMarsSol());
         model.put("maxSol",manifestData.getMaxSol());
         model.put("roverData",roverData);
+        model.put("homeDto",homeDto);
         return "index";
     }
 }
