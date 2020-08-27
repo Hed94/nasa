@@ -1,8 +1,10 @@
 package com.hed.nasa.service;
 
 import com.hed.nasa.dto.HomeDto;
+import com.hed.nasa.repository.PreferencesRepository;
 import com.hed.nasa.response.MarsPhoto;
 import com.hed.nasa.response.MarsRoverApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +18,9 @@ public class MarsRoverAPIService {
 
     private static final String API_KEY = "0rIHBZwB4gTtdMSrlMpfFaEqniVCFXSofHCQ8kni";
     private Map<String,List<String>> validCameras = new HashMap<>();
+
+    @Autowired
+    private PreferencesRepository preferencesRepo;
 
     public MarsRoverAPIService()
     {
@@ -65,5 +70,13 @@ public class MarsRoverAPIService {
 
     public Map<String, List<String>> getValidCameras() {
         return validCameras;
+    }
+
+    public HomeDto save(HomeDto homeDto) {
+        return preferencesRepo.save(homeDto);
+    }
+
+    public HomeDto findByUserId(Long userId) {
+        return preferencesRepo.findByUserId(userId);
     }
 }

@@ -20,6 +20,10 @@ public class HomeDto {
     private Boolean cameraMinites;
     private Boolean rememberPreferences;
 
+    public HomeDto() {
+        rememberPreferences = false;
+    }
+
     @Override
     public String toString() {
         return "HomeDto{" +

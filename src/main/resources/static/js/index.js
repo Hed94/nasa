@@ -1,11 +1,14 @@
 let userId = getUrlParameter('userId')
 if(userId == null || userId ==''){
     userId = localStorage.getItem('userId')
+    if(userId == null || userId ==''){
+    document.getElementById('createUser').value = true
+    }
 }
 
 if(userId != null || userId !=''){
     localStorage.setItem('userId',userId)
-    document.getElementById('userId') = userId
+    document.getElementById('userId').value = userId
 }
 
 // Teoreticky by šlo používat jen id, kdyby se z toho jejich ID smazala marsApi ale takhle je to víc dynamické
@@ -19,7 +22,7 @@ document.getElementById('frmRoverType').submit()
 }))
 
 
-
+//Funkce pro sbírání hodnot z parametrů url
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -27,10 +30,9 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
-const parameterRoverName = getUrlParameter("marsApiRoverData")
-highLightButton(parameterRoverName)
-const parameterSol = getUrlParameter("marsSol")
-document.getElementById('marsSol').value = parameterSol
+let marsRoverType = document.getElementById('marsApiRoverData').value
+highLightButton(marsRoverType)
+let marsSol = document.getElementById('marsSol').value
 
 function highLightButton(roverType)
 {
