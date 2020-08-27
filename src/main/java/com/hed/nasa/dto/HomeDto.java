@@ -2,6 +2,12 @@ package com.hed.nasa.dto;
 
 import javax.persistence.*;
 
+/*
+HomeDto je objekt, kterej zmapovaný hibernatem do tabulky
+Zároveň je to objekt zmapovaný Thymeleafem do html elementů
+Tím pádem je jeden objekt přesouván mezi back end databází a front end html
+ */
+
 @Entity
 @Table(name="mars_api_preferences")
 public class HomeDto {

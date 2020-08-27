@@ -2,6 +2,12 @@ package com.hed.nasa.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/*
+MarsPhoto je objekt, který mapuje z NASA API jednotlivé fotky.
+V projektu se využívá hlavě imgSrc a zbytek atributů není využitý.
+V budoucnu se to pravděpodobně změní
+ */
+
 public class MarsPhoto {
     private Long id;
     private Integer sol;

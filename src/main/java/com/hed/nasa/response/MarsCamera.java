@@ -2,6 +2,12 @@ package com.hed.nasa.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/*
+MarsCamera je objekt, který mapuje z NASA API hodnoty o kamerách.
+V projektu zatím není nijak využit.
+Nicméně když už ty data člověk z Api má, proč je neskladovat pro budoucí využití.
+ */
+
 public class MarsCamera {
     private Long id;
     private String name;

@@ -2,6 +2,12 @@ package com.hed.nasa.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/*
+MarsRover je objekt, který mapuje z NASA API data o jednotlivých roverech
+V projektu zatím není nijak využit.
+Nicméně když už ty data člověk z Api má, proč je neskladovat pro budoucí využití.
+ */
+
 public class MarsRover {
     private Long id;
     private String name;

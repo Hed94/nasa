@@ -1,3 +1,5 @@
+// Část která se stará o userID
+// Snaží se ho brát z parametru, když není tak z local storage, když není ani tam nastaví příznak pro nového uživatele
 let userId = getUrlParameter('userId')
 if(userId == null || userId ==''){
     userId = localStorage.getItem('userId')
@@ -11,7 +13,7 @@ if(userId == null || userId ==''){
         window.location.href = '/?userId='+userId
     }
 }
-
+// V případě že userID existuje a bylo nalezeno, tak se nastaví do html elementu z kterého si ho pak backend vezme
 if(userId != null || userId !=''){
     localStorage.setItem('userId',userId)
     document.getElementById('userId').value = userId
@@ -36,9 +38,12 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
+// Nastavení barvičky vozítku podle toho které je vybrané
 let marsRoverType = document.getElementById('marsApiRoverData').value
 highLightButton(marsRoverType)
-let marsSol = document.getElementById('marsSol').value
+
+// Zmetek ale radši ho tu nechám
+//let marsSol = document.getElementById('marsSol').value
 
 function highLightButton(roverType)
 {
@@ -51,6 +56,9 @@ function highLightButton(roverType)
     apiData.value = roverType;
 }
 
+// Tato část se stará jen o slider
+// Je to přebrané z jejich dokumentace k němu.
+// V podstatě to nastavuje tu číselnou hodnotu pod slider, aby uživatel viděl kolik si nastavil
 $(document).ready(function() {
 
   const $valueSpan = $('.valueSpan2');
